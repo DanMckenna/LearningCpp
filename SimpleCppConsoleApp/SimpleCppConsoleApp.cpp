@@ -204,6 +204,120 @@ void testPODs() {
 	printf("A POD was created to replicate a book that was written in %d and has %d pages\n\n", myBook.year, myBook.pages);
 }
 
+//Prints messages showcasing fully featured classes
+void testFullyFeaturedClasses() {
+	printf("*****Fully Featured Classes*****\n");
+
+	/* Definition of a fully featured class containing:
+	 * - class members
+	 * - a default constructor
+	 * - a constructor that accepts a parameter
+	 * - a "gettter" function
+	 * - a "setter" function
+	 * Please note that the struct keyword denotes that all class members are public by default
+	 */
+	struct YearlyClock {
+		//Default class constructor
+		YearlyClock() {
+			year = 2024; //sets the default year value
+		}
+
+		//Class constructor that accepts an integer
+		YearlyClock(int newYear) {
+			year = newYear;
+		}
+
+		//class member function that returns the year
+		int getYear() {
+			return year;
+		}
+
+		//class member function that sets the year
+		void setYear(int newYear) {
+			year = newYear;
+		}
+
+	//Private Class members
+	private:
+		int year{};
+	};
+
+	YearlyClock myClock{};
+	YearlyClock myOtherClock{ 2030 };
+
+	printf("A clock object was created. The default constructor set the year to %d and was retrieved using a \"getter\" function\n", myClock.getYear());
+	myClock.setYear(2025);
+	printf("The year was adjusted to %d using a \"setter\" function\n", myClock.getYear());
+	printf("Another clock object was created. The default year was set to %d using another constructor.\n\n", myOtherClock.getYear());
+}
+
+//Prints messages showcasing initialization techniques
+void testInitializations() {
+	printf("*****Initialization techniques*****\n");
+
+	printf("Here are some examples of how an integer can be initialized:\n");
+	int a = 24;
+	int b{ 24 };
+	int c = { 24 };
+	int d(24);
+
+	printf("int a = 24\n");
+	printf("int b{ 24 } //This is ideal\n");
+	printf("int c = { 24 }\n");
+	printf("int d(24)\n\n");
+
+	printf("Here are some examples of how an array can be initialized:\n");
+	int array1[]{ 1,2,3 }; //Array length is 3, values are 1,2,3
+	int array2[5]{}; //Array length is 5, values are all zero
+	int array3[5]{ 1,2,3 }; //Array length is 5, values are 1,2,3,0,0
+	int array4[5]; //Array length is 5, values are unitialized
+
+	printf("int array1[]{ 1,2,3 } //Array length is 3, values are 1,2,3\n");
+	printf("int array2[5]{} //Array length is 5, values are all zero\n");
+	printf("int array3[5]{ 1,2,3 } //Array length is 5, values are 1,2,3,0,0\n");
+	printf("int array4[5] //Array length is 5, values are unitialized\n\n");
+
+	printf("Here are some examples of how a POD can be initialized:\n");
+	struct SamplePod {
+		int a;
+		char b[256];
+		bool c;
+	};
+
+	SamplePod pod1{};
+	SamplePod pod2 = {};
+	SamplePod pod3{ 24, "Hi", true };
+	SamplePod pod4 = { 24, "Hi", true };
+
+	printf("SamplePod pod1{}\n");
+	printf("SamplePod pod2 = {};\n");
+	printf("SamplePod pod3{ 24, \"Hi\", true }\n");
+	printf("SamplePod pod4 = { 24, \"Hi\", true }\n\n");
+
+	printf("Here are some examples of how a class can be initialized:\n");
+	struct SampleClass {
+		SampleClass() {
+			a = 10;
+		}
+
+		SampleClass(int myNum) {
+			a = myNum;
+		}
+
+		int a;
+	};
+
+	SampleClass class1; //Invokes the default constructor with no arguments
+	SampleClass class2{}; //Invokes the default constructor with no arguments
+	SampleClass class3{ 7 }; //Invoke the constructor that takes one integer argument
+	SampleClass class4 = { 7 }; //Invoke the constructor that takes one integer argument
+
+	printf("SampleClass class1; //Invokes the default constructor with no arguments\n");
+	printf("SampleClass class2{}; //Invokes the default constructor with no arguments\n");
+	printf("SampleClass class3{ 7 }; //Invoke the constructor that takes one integer argument\n");
+	printf("SampleClass class4 = { 7 }; //Invoke the constructor that takes one integer argument\n\n");
+}
+
 /* The entry point for the application
  * Contains all of the code that will be performed upon running the executable
  */
@@ -243,6 +357,12 @@ int main() {
 
 	//Showcase the use of Plain Old Data classes (PODs)
 	testPODs();
+
+	//Showcase the use of fully featured classes
+	testFullyFeaturedClasses();
+
+	//Showcase the different ways to Initialize
+	testInitializations();
 
 	return 0;
 }
