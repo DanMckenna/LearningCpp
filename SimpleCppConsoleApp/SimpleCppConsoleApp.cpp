@@ -133,6 +133,77 @@ void testRangeBasedForLoops() {
 	printf("\n");
 }
 
+//Print message showcasing enums and switch statements
+void testEnumsAndSwitchStatements() {
+	printf("*****Enums and Switch Statments*****\n");
+	printf("The following actions will be performed as part of a showcase of enums and switch statements:\n"
+		" - Create an enum class definition containing members for each day of the week\n"
+		" - Create an instance of our enum class and set it's value to \"Thursday\"\n"
+		" - Use switch/case statements to cycle through each possible value in our enum object\n"
+		" - Print a message when the matching enum value is found by one of the cases in the switch statement\n\n");
+
+	//Create our enum definition
+	enum class DayOfTheWeek {
+		Monday,
+		Tuesday,
+		Wednesday,
+		Thursday,
+		Friday,
+		Saturday,
+		Sunday
+	};
+
+	//Create an instance of our enum class
+	DayOfTheWeek day = DayOfTheWeek::Thursday;
+
+	//Print a message to the terminal when a matching enum value is found
+	switch (day) {
+		case DayOfTheWeek::Monday: {
+			printf("The day of the week is Monday\n\n");
+		} break;
+		case DayOfTheWeek::Tuesday: {
+			printf("The day of the week is Tuesday\n\n");
+		} break;
+		case DayOfTheWeek::Wednesday: {
+			printf("The day of the week is Wednesday\n\n");
+		} break;
+		case DayOfTheWeek::Thursday: {
+			printf("The day of the week is Thursday\n\n");
+		} break;
+		case DayOfTheWeek::Friday: {
+			printf("The day of the week is Friday\n\n");
+		} break;
+		case DayOfTheWeek::Saturday: {
+			printf("The day of the week is Saturday\n\n");
+		} break;
+		case DayOfTheWeek::Sunday: {
+			printf("The day of the week is Sunday\n\n");
+		} break;
+		default: {
+			printf("I don't know what day it is\n\n");
+		} break;
+	}
+}
+
+//Prints messages showcasing Plain-Old-Data (POD) classes
+void testPODs() {
+	printf("*****Plain-Old-Data Classes (PODs)*****\n");
+
+	//POD class definition
+	struct Book {
+		int year;
+		int pages;
+	};
+
+	Book myBook; //Create an instance of the Book POD class named "myBook"
+	
+	//Set the values of each member of myBook
+	myBook.year = 1883;
+	myBook.pages = 216;
+
+	printf("A POD was created to replicate a book that was written in %d and has %d pages\n\n", myBook.year, myBook.pages);
+}
+
 /* The entry point for the application
  * Contains all of the code that will be performed upon running the executable
  */
@@ -166,6 +237,12 @@ int main() {
 
 	//Showcase the use of Range-Based loop
 	testRangeBasedForLoops();
+
+	//Showcase the use of enums and switch/case statements
+	testEnumsAndSwitchStatements();
+
+	//Showcase the use of Plain Old Data classes (PODs)
+	testPODs();
 
 	return 0;
 }
