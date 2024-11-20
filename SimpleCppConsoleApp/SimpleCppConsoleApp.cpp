@@ -318,6 +318,100 @@ void testInitializations() {
 	printf("SampleClass class4 = { 7 }; //Invoke the constructor that takes one integer argument\n\n");
 }
 
+//Prints messages showcasing proper pointer syntax
+void testPointers() {
+	printf("*****Working with Pointers*****\n");
+
+	//Returning the value of a variable
+	int gettysburg{ 1863 }; //An integer initialized with a value of 1863
+	printf("The data value of integer variable named gettysburg is: %d\n", gettysburg);
+	
+	//Returning the memory address of a variable using a pointer via the "Address-Of Operator (&)"
+	int* gettysburg_address = &gettysburg; //An integer pointer referencing the memory address of the gettysburg variable
+	printf("The memory address of the integer variable named gettysburg is: %p\n", gettysburg_address);
+	
+	//Returning the value of a variable using a pointer via the "Dereference Operator (*)"
+	printf("The data value of the variable being referenced by the gettysburg_address pointer is: %d\n", *gettysburg_address);
+	
+	//Modifying the data value of a variable using a poing via the "Dereference Operator (*)"
+	*gettysburg_address = 1865;
+	printf("The data value of the gettysburg variable was modified via the gettysburg_address pointer and is now: %d\n\n", gettysburg);
+}
+
+//Prints messages showcasing Arrow Operator syntax
+void testArrowOperators() {
+	printf("*****Using Arrow Operators*****\n");
+	printf("The Arrow Operator is used to dereference/access the member variables and methods\n"
+		   "of class objects being referenced by a pointer.\n\n");
+
+	struct YearlyClock {
+		int getYear() {
+			return year;
+		}
+		
+		void setYear(int newYear) {
+			year = newYear;
+		}
+
+		int year{};
+
+		//Default Constructor
+		YearlyClock() {
+			year = 2000;
+		}
+	};
+
+	YearlyClock myClock;
+	printf("A new instance of the YearlyClock class has been created with a default year value of: 2000\n");
+	
+	//Print the current year value of the YearlyClock object by directly accessing it's year member
+	printf("The value of the year member was directly accessed and returned from the YearlyClock object: %d\n", myClock.year);
+	
+	//Print the current year value of the YearlyClock object by directly invoking the getYear() method
+	printf("The getYear() method was directly invoked against the YearlyClock object: %d\n", myClock.getYear());
+
+	//Print the result of directly invoking the setYear() function against the YearlyClock object
+	myClock.setYear(2001);
+	printf("The setYear() method was directly invoked against the YearlyClock object and changed the year to: %d\n", myClock.getYear());
+
+	//Dereference and access the value of the YearlyClock year value from the Yearly clock pointer using the Arrow Operator
+	YearlyClock* myClock_ptr = &myClock;
+	printf("The year member was dereferenced/accessed from the YearlyClock pointer using the arrow operator: %d\n", myClock_ptr -> year);
+
+	//Invoke the getYear() method against the YearlyClock object referenced by the YearlyClock pointer using the Arrow Operator
+	printf("The getYear() method was invoked by the YearlyClock pointer using the Arrow Operator: %d\n", myClock_ptr->getYear());
+
+	//Invoke the setYear() method against the YearlyClock object referenced by the YearlyClock pointer using the Arrow Operator
+	myClock_ptr -> setYear(2002);
+	printf("The setYear() method was invoked by the YearlyClock pointer using the Arrow Operator and changed to: %d\n\n", myClock_ptr->getYear());
+}
+
+//Print messages showcasing References
+void testLambdasAndReferences() {
+	printf("*****Using Lambdas and References*****\n");
+
+	struct YearlyClock {
+		int year{};
+
+		//Default Constructor
+		YearlyClock() {
+			year = 2000;
+		}
+	};
+	
+	//Create a lambda function that accepts a reference to the YearlyClock object and increments it
+	//Lambda functions enable us to create functions within functions
+	auto incrementYear = [](YearlyClock& myClock) {
+		myClock.year++;
+	};
+
+	YearlyClock myClock;
+	printf("A new instance of the YearlyClock class has been created with a default year value of: %d\n", myClock.year);
+	
+	incrementYear(myClock);
+	printf("The YearlyClock object was implicitly passed by reference to a lambda function and updated to: %d\n\n", myClock.year);
+}
+
 /* The entry point for the application
  * Contains all of the code that will be performed upon running the executable
  */
@@ -363,6 +457,15 @@ int main() {
 
 	//Showcase the different ways to Initialize
 	testInitializations();
+
+	//Showcase Pointer syntax
+	testPointers();
+
+	//Showcase Arrow Operators
+	testArrowOperators();
+
+	//Showcase Lambda functions and passing by reference
+	testLambdasAndReferences();
 
 	return 0;
 }
